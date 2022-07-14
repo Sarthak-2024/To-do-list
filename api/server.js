@@ -32,15 +32,21 @@ app.post('/todo/new', (req, res) => {
     res.json(todo);
 });
 
-app.delete('/todo/delete/:id', async (req, res) => {
+app.delete('/todo/delete/:id', async (req, res, next) => {
+    const todo = await Todo.findById(req.params.id);
+    if(!todo){
+        return next(console.log("Shit! Seems like we got ourselves an Error"));
+    }
     const result = await Todo.findByIdAndDelete(req.params.id)
     res.json(result);
 });
 
 
-app.get('/todo/complete/:id', async (req, res) => {
+app.get('/todo/complete/:id', async (req, res, next) => {
     const todo = await Todo.findById(req.params.id);
-
+    if(!todo){
+        return next(console.log("Damn! Seems like we got ourselves an Error"));
+    }
     todo.complete = !todo.complete;
     todo.save();
     res.json(todo);
