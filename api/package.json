@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node api/server.js",
-    "dev": "nodemon api/server.js",
+    "start": "nodemon server.js",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false && npm install --prefix frontend && npm run build --prefix frontend"
   },
   "author": "Sarthak Kashyap",
